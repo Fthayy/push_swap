@@ -19,7 +19,7 @@ typedef struct  s_list
     t_stack *a;
     t_stack *b;
     struct  s_list  *next;
-    int size;
+    void        size;
      
 }                   t_list;
 

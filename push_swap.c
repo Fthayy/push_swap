@@ -17,8 +17,8 @@ char get_numbers(char **av)
         j = 0;
         while(x[j])
         {
-            strjoin(a,x[j]);
-            strjoin(a," ");
+            ft_strjoin(a,x[j]);
+            ft_strjoin(a," ");
             j++;
         }
     }    
@@ -73,12 +73,20 @@ int main(int ac,char **av)
     int i;
     int size;
     t_stack *a;
+    t_stack *b
 
+    i = 2;
     if (ac > 1)
     {
         numbers = get_numbers(av);
         size = find_size(av);
-        a = malloc(sizeof(t_stack));
+        a = lstnew(numbers[1])
+        while (size >= 0)
+        {
+            b = lstnew(numbers[i]);
+            lstadd(&a,b);
+            size--;
+        }
     }
     return (0);
 }
