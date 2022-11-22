@@ -2,40 +2,26 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
-
-ft_getav(char **av)
+int get_numbers(char **av)
 {
     int i;
-    char *str;
+    char **x;
+    char *a;
+    int j;
+    j = 0;
     i = 1;
-    while (av[i])
+    while (av)
     {
-        ft_strjoin(str,av[i]);
-        ft_strjoin(str," ");
+        x = ft_split(av[i]," ");
         i++;
-    }
-    return(str);
-}
-get_numbers(char **av)
-{
-    char *str
-    char **arr;
-    t_list *swap;
-    int len;
-    while(arr[len])
-        len++;
-    swap = calloc(1,sizeof(t_list);
-    swap->stack_a = calloc(1,sizeof(int)*len);
-    swap->stack_b = calloc(1,sizeof(int)*len);
-    swap->sorted = calloc(1,sizeof(int)*len);
-    swap->sorted_inx = calloc(1,sizeof(int)*len);
-    swap->a_len = len;
-    swap->b_len = len;
-    str = ft_getav(**av);
-    arr = ft_split(av,' ');
-    {
-        
-    }
+        while(x)
+        {
+            strjoin(a,x[j]);
+            strjoin(a," ");
+            j++;
+        }
+    }        
+    return (a); // a = "11 2 3 5 7 2 1 5 7 2"
 }
 
 int main(int ac,char **av)
@@ -45,6 +31,7 @@ int main(int ac,char **av)
 
     if (ac > 1)
     {
-        get_numbers(char **av);
+        get_numbers(av);
+    }
     return (0);
 }

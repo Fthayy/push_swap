@@ -1,5 +1,6 @@
 char *foreav(char **a)
 {
+    push_a;
     threeav(char **a);
     if (b[1] < a[1])
         push_b();
