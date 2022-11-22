@@ -106,5 +106,3 @@ void pa(t_list *list) // A'nın ilk elemanını B'nin ilk elemanı haline getiri
     free(tmp);
     free(tmpprev);
 }
-
-void 
