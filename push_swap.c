@@ -2,7 +2,7 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
-char get_numbers(char **av)
+char *get_numbers(char **av)
 { 
     int i;
     char **x;
@@ -12,7 +12,7 @@ char get_numbers(char **av)
     i = 1;
     while (av)
     {
-        x = ft_split(av[i]," ");
+        x = ft_split(av[i],' ');
         i++;
         j = 0;
         while(x[j])
@@ -36,7 +36,7 @@ int find_size(char **av)
     i = 1;
     while (av)
     {
-        x = ft_split(av[i]," ");
+        x = ft_split(av[i],' ');
         i++;
         j = 0;
         while(x[j])
@@ -48,6 +48,27 @@ int find_size(char **av)
     return (size); // a = "11 2 3 5 7 2 1 5 7 2"
 }
 
+t_stack	*ft_lstlastnmb(t_stack *lst)
+{
+	while (lst != NULL && lst->next != NULL)
+	{
+		lst = lst->next;
+	}
+	return (lst);
+}
+
+t_stack	*ft_lstnmb(long int nbr)
+{
+	t_stack	*new;
+
+	new = malloc(sizeof(t_stack));
+	if (!new)
+		return (NULL);
+	new->nb = nbr;
+	new->next = NULL;
+	return (new);
+}
+
 t_stack	*ft_prev(t_stack *lst)
 {
 	while (lst != NULL && lst->next->next != NULL && lst->next != NULL)
@@ -57,36 +78,58 @@ t_stack	*ft_prev(t_stack *lst)
 	return (lst);
 }
 
-t_stack lstadd(t_stack **lst,t_stack *new)
+t_stack *lstadd(t_stack **lst,t_stack *new)
 {
     if (*lst == NULL)
         *lst =new;
-    ft_lstlast(*lst)->next = new;
+    ft_lstlastnmb(*lst)->next = new;
     new->next = NULL;
     new->prev = ft_prev(*lst);
+    return(*lst);
 }
 
+t_stack *new_funct(char *numbers,int size)
+{
+    int i;
+    t_stack *b;
+    t_stack *a;
+    i = 2;
+    a = ft_lstnmb(numbers[i]);
+    while (size > 1)
+    {
+        b = ft_lstnmb(numbers[i]);
+        lstadd(&a,b);
+        size--;
+    }
+    return (a);
+}
+
+void choose_method(int size,t_stack *a_stack)
+{
+    t_stack *b_stack;
+
+    if (size == 2)
+        two_sort(a_stack);
+    else if (size == 3)
+        three_sort(a_stack);
+    else if (size == 4)
+        four_sort(a_stack,b_stack);
+    else;
+
+}
 
 int main(int ac,char **av)
 {
     char *numbers;
-    int i;
     int size;
-    t_stack *a;
-    t_stack *b
+    t_stack *a_stack;
 
-    i = 2;
     if (ac > 1)
     {
         numbers = get_numbers(av);
         size = find_size(av);
-        a = lstnew(numbers[1])
-        while (size >= 0)
-        {
-            b = lstnew(numbers[i]);
-            lstadd(&a,b);
-            size--;
-        }
+        a_stack = new_funct(numbers,size);
+        choose_method(size,a_stack);
     }
     return (0);
 }

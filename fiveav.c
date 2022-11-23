@@ -1,3 +1,0 @@
-char *fiveav(char **a)
-{
-    
