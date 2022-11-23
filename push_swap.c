@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "libft/libft.h"
 #include "push_swap.h"
-
 char *get_numbers(char **av)
 { 
     int i;
@@ -9,7 +8,7 @@ char *get_numbers(char **av)
     char *a;
     int j;
     j = 0;
-    i = 1;
+    i = 2;
     while (av)
     {
         x = ft_split(av[i],' ');
@@ -21,7 +20,7 @@ char *get_numbers(char **av)
             ft_strjoin(a," ");
             j++;
         }
-    }    
+    }
     return (a); // a = "11 2 3 5 7 2 1 5 7 2"
 }
 
@@ -117,19 +116,38 @@ void choose_method(int size,t_stack *a_stack)
     else;
 
 }
+/*int	ft_prime_atoi(char *numbers)
+{
+    int *numeros;
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (numbers[i])
+    {
+        while (numbers[i] != ' ')
+            j++;
+        
+        if (numbers[i] == ' ')
+            j++;            
+    }
+}*/
 
 int main(int ac,char **av)
 {
     char *numbers;
     int size;
     t_stack *a_stack;
+    int *numeros;
 
     if (ac > 1)
     {
         numbers = get_numbers(av);
         size = find_size(av);
-        a_stack = new_funct(numbers,size);
-        choose_method(size,a_stack);
+        //numeros = ft_prime_atoi(numbers);
+        //a_stack = new_funct(numbers,size);
+        //choose_method(size,a_stack);
     }
     return (0);
 }
