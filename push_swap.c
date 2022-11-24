@@ -7,17 +7,19 @@ char *get_numbers(char **av)
     char **x;
     char *a;
     int j;
+
+    a = "";
     j = 0;
-    i = 2;
-    while (av)
+    i = 1;
+    while (av[i])
     {
         x = ft_split(av[i],' ');
         i++;
         j = 0;
         while(x[j])
         {
-            ft_strjoin(a,x[j]);
-            ft_strjoin(a," ");
+            a = ft_strjoin(a,x[j]);
+            a = ft_strjoin(a," ");
             j++;
         }
     }
@@ -33,7 +35,7 @@ int find_size(char **av)
     size = 0;
     j = 0;
     i = 1;
-    while (av)
+    while (av[i])
     {
         x = ft_split(av[i],' ');
         i++;
@@ -49,11 +51,16 @@ int find_size(char **av)
 
 t_stack	*ft_lstlastnmb(t_stack *lst)
 {
-	while (lst != NULL && lst->next != NULL)
+    t_stack *tmp;
+
+    tmp = lst;
+    if(!lst)
+        return NULL;
+	while (tmp->next != NULL)
 	{
-		lst = lst->next;
+		tmp = tmp->next;
 	}
-	return (lst);
+	return (tmp);
 }
 
 t_stack	*ft_lstnmb(long int nbr)
@@ -70,11 +77,14 @@ t_stack	*ft_lstnmb(long int nbr)
 
 t_stack	*ft_prev(t_stack *lst)
 {
-	while (lst != NULL && lst->next->next != NULL && lst->next != NULL)
+    t_stack *hold;
+    
+    hold = lst;
+	while ( hold->next->next != NULL)
 	{
-		lst = lst->next;
+		hold = hold->next;
 	}
-	return (lst);
+	return (hold);
 }
 
 t_stack *lstadd(t_stack **lst,t_stack *new)
@@ -87,17 +97,18 @@ t_stack *lstadd(t_stack **lst,t_stack *new)
     return(*lst);
 }
 
-t_stack *new_funct(char *numbers,int size)
+t_stack *new_funct(int *numbers,int size)
 {
     int i;
-    t_stack *b;
+    t_stack *c;
     t_stack *a;
-    i = 2;
+    i = 0;
     a = ft_lstnmb(numbers[i]);
     while (size > 1)
     {
-        b = ft_lstnmb(numbers[i]);
-        lstadd(&a,b);
+        i++;
+        c = ft_lstnmb(numbers[i]);
+        lstadd(&a,c);
         size--;
     }
     return (a);
@@ -110,29 +121,29 @@ void choose_method(int size,t_stack *a_stack)
     if (size == 2)
         two_sort(a_stack);
     else if (size == 3)
+    {
         three_sort(a_stack);
+    }
     else if (size == 4)
         four_sort(a_stack,b_stack);
-    else;
-
 }
-/*int	ft_prime_atoi(char *numbers)
-{
-    int *numeros;
-    int i;
-    int j;
 
-    i = 0;
-    j = 0;
-    while (numbers[i])
+int	*ft_prime_atoi(char *numbers,int size)
+{ 
+    int *numeros;
+    char **tmp;
+    int y;
+
+    y = 0;
+    numeros = malloc (sizeof(int)*size);
+    tmp = ft_split(numbers,' ');
+    while (tmp[y])
     {
-        while (numbers[i] != ' ')
-            j++;
-        
-        if (numbers[i] == ' ')
-            j++;            
+        numeros[y] = ft_atoi(tmp[y]);
+        y++;
     }
-}*/
+    return (numeros);
+}
 
 int main(int ac,char **av)
 {
@@ -143,11 +154,14 @@ int main(int ac,char **av)
 
     if (ac > 1)
     {
-        numbers = get_numbers(av);
         size = find_size(av);
-        //numeros = ft_prime_atoi(numbers);
-        //a_stack = new_funct(numbers,size);
-        //choose_method(size,a_stack);
+        numbers = get_numbers(av);
+        // printf("numbers:%s\n",numbers);
+        numeros = ft_prime_atoi(numbers,size);
+        //printf("numeros:%d\n",numeros[0]);
+        a_stack = new_funct(numeros,size);
+        //printf("%ld",a_stack->next->nb);
+        choose_method(size,a_stack);
     }
     return (0);
 }

@@ -28,5 +28,6 @@ void        rrr(t_stack *a);
 t_stack *three_sort(t_stack *a);
 t_stack *four_sort(t_stack *a,t_stack *b);
 t_stack *two_sort(t_stack *a);
+t_stack	*ft_lstlastnmb(t_stack *lst);
 
 #endif

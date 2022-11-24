@@ -1,4 +1,5 @@
 #include "push_swap.h"
+#include <stdio.h>
 
 void sa(t_stack *a)
 {
@@ -30,8 +31,20 @@ void ss(t_stack *a)
 
 void ra(t_stack *a)
 {
-    if (a)
+    t_stack *tmp;
+    t_stack *tmp2;
+    long int hold = a->nb;
+    tmp2 = a;
+    tmp = a;
+    while(tmp->next != NULL)
+    {
+        a->nb = tmp->next->nb;
         a = a->next;
+        tmp = tmp->next;
+    }
+    a = tmp2;
+    if (tmp->next == NULL)
+        ft_lstlastnmb(a)->nb = hold;
 }
 
 void rb(t_stack *b)
@@ -65,10 +78,10 @@ void rrr(t_stack *a)
 
 void pb(t_stack *a,t_stack *b) // A'nın ilk elemanını B'nin ilk elemanı haline getiriyoruz. B boşsa hic bisi yapma.
 {
-    t_stack *tmp;
-    t_stack *tmpprev;
-    if(a)
+    if(a != NULL)
     {
+        t_stack *tmp;
+        t_stack *tmpprev;
 
         tmp = b;
         tmpprev = b->prev;
@@ -80,17 +93,17 @@ void pb(t_stack *a,t_stack *b) // A'nın ilk elemanını B'nin ilk elemanı hali
         a = a->next;
         a->prev = tmpprev;
         a->prev->next = a;
+        free(tmp);
+        free(tmpprev);
     }
-    free(tmp);
-    free(tmpprev);
 }
 
 void pa(t_stack *a, t_stack *b) // A'nın ilk elemanını B'nin ilk elemanı haline getiriyoruz. B boşsa hic bisi yapma.
 {
-    t_stack *tmp;
-    t_stack *tmpprev;
-    if(a)
+    if(a != NULL)
     {
+        t_stack *tmp;
+        t_stack *tmpprev;
 
         tmp = a;
         tmpprev = a->prev;
@@ -102,7 +115,8 @@ void pa(t_stack *a, t_stack *b) // A'nın ilk elemanını B'nin ilk elemanı hal
         b = b->next;
         b->prev = tmpprev;
         b->prev->next = b;
+
+        free(tmp);
+        free(tmpprev);
     }
-    free(tmp);
-    free(tmpprev);
 }

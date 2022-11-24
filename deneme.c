@@ -8,20 +8,24 @@ char *get_numbers(char **av)
     char **x;
     char *a;
     int j;
+    int *numo;
+
+    int y = 5;
+    a = "";
     i = 1;
     while (av[i])
     {
-        printf("%s\n",av[i]);
         x = ft_split(av[i],' ');
         i++;
         j = 0;
-        /*while(x[j])
+        while(x[j])
         {
-            printf("%s",x[j]);
-            //ft_strjoin(a,x[j]);
-            //ft_strjoin(a," ");
+            printf("%s ",x[j]);
+            a = ft_strjoin(a,x[j]);
+            a = ft_strjoin(a," ");
             j++;
-        }*/
+        }
+        free (x);
     }
     return (a); // a = "11 2 3 5 7 2 1 5 7 2"
 }
