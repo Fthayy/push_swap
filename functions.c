@@ -49,31 +49,55 @@ void ra(t_stack *a)
 
 void rb(t_stack *b)
 {
-    if (b)
+    t_stack *tmp;
+    t_stack *tmp2;
+    long int hold = b->nb;
+    tmp2 = b;
+    tmp = b;
+    while(tmp->next != NULL)
+    {
+        b->nb = tmp->next->nb;
         b = b->next;
+        tmp = tmp->next;
+    }
+    b = tmp2;
+    if (tmp->next == NULL)
+        ft_lstlastnmb(b)->nb = hold;
 }
 
-void rr(t_stack *a)
+void rr(t_stack *a,t_stack *b)
 {
-    rb(a);
+    rb(b);
     ra(a);
 }
 
-void rrb(t_stack *b)
+t_stack* rrb(t_stack *b)
 {
-    if (b)
-        b = b->prev;
+    t_stack *ilk;
+    t_stack *son;
+    ilk = b;
+    son = ft_lstlastnmb(b);
+    son->prev->next = NULL;
+    b = son;
+    son->next = ilk;
+    return(b);
 }
-void rra(t_stack *a)
+t_stack *rra(t_stack *a)
 {
-    if (a)
-        a = a->prev;
+    t_stack *ilk;
+    t_stack *son;
+    ilk = a;
+    son = ft_lstlastnmb(a);
+    son->prev->next = NULL;
+    a = son;
+    son->next = ilk;
+    return(a);
 }
 
-void rrr(t_stack *a)
+void rrr(t_stack *a,t_stack *b)
 {
     rra(a);
-    rrb(a);
+    rrb(b);
 }
 
 void pb(t_stack *a,t_stack *b) // A'nın ilk elemanını B'nin ilk elemanı haline getiriyoruz. B boşsa hic bisi yapma.
@@ -82,26 +106,13 @@ void pb(t_stack *a,t_stack *b) // A'nın ilk elemanını B'nin ilk elemanı hali
     {
         t_stack *tmp;
         t_stack *tmpprev;
-
-        tmp = b;
-        tmpprev = b->prev;
-        b = a;
-        b->next = tmp;
-        b->prev = tmpprev;
-        b->prev->next = b;
-        tmpprev = a->prev;
-        a = a->next;
-        a->prev = tmpprev;
-        a->prev->next = a;
-        free(tmp);
-        free(tmpprev);
+        
     }
 }
 
 void pa(t_stack *a, t_stack *b) // A'nın ilk elemanını B'nin ilk elemanı haline getiriyoruz. B boşsa hic bisi yapma.
 {
-    if(a != NULL)
-    {
+    
         t_stack *tmp;
         t_stack *tmpprev;
 
@@ -118,5 +129,4 @@ void pa(t_stack *a, t_stack *b) // A'nın ilk elemanını B'nin ilk elemanı hal
 
         free(tmp);
         free(tmpprev);
-    }
 }

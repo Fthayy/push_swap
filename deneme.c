@@ -1,51 +1,35 @@
-#include "libft/libft.h"
-#include <stdio.h>
-#include "push_swap.h"
-
-char *get_numbers(char **av)
-{ 
-    int i;
-    char **x;
-    char *a;
-    int j;
-    int *numo;
-
-    int y = 5;
-    a = "";
-    i = 1;
-    while (av[i])
+void ra(t_stack *a)
+{
+    t_stack *tmp;
+    t_stack *tmp2;
+    long int hold = a->nb;
+    tmp2 = a;
+    tmp = a;
+    while(tmp->next != NULL)
     {
-        x = ft_split(av[i],' ');
-        i++;
-        j = 0;
-        while(x[j])
-        {
-            printf("%s ",x[j]);
-            a = ft_strjoin(a,x[j]);
-            a = ft_strjoin(a," ");
-            j++;
-        }
-        free (x);
+        a->nb = tmp->next->nb;
+        a = a->next;
+        tmp = tmp->next;
     }
-    return (a); // a = "11 2 3 5 7 2 1 5 7 2"
+    a = tmp2;
+    if (tmp->next == NULL)
+        ft_lstlastnmb(a)->nb = hold;
 }
 
-
-
-
-int main(int ac,char **av)
+void rra(t_stack *a)
 {
-    char *numbers;
-    int size;
-    t_stack *a_stack;
-    int *numeros;
-    if (ac > 1)
+    t_stack *tmp;
+    t_stack *tmp2;
+    tmp2 = a;
+    tmp = a;
+    long int hold = ft_lstlastnmb(a)->nb;
+    while(tmp != NULL)
     {
-        numbers = get_numbers(av);
-        //size = find_size(av);
-        //numeros = ft_prime_atoi(numbers);
-        //a_stack = new_funct(numbers,size);
-        //choose_method(size,a_stack);
+        a->next->nb = tmp->nb;
+        a = a->next;
+        tmp = tmp->next;
     }
-    return (0);
+    a = tmp2;
+    if(tmp == NULL)
+        a->nb = hold;
 }

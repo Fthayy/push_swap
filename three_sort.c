@@ -9,23 +9,23 @@ t_stack *three_sort(t_stack *a)
 
     if (a->nb > a->next->nb && a->next->nb < a->next->next->nb && a->nb > a->next->next->nb)
         ra(a);
-    if (a->nb > a->next->nb && a->next->nb < a->next->next->nb && a->nb < a->next->next->nb)
+    else if (a->nb > a->next->nb && a->next->nb < a->next->next->nb && a->nb < a->next->next->nb)
         sa(a);
-    if (a->nb < a->next->nb && a->next->nb > a->next->next->nb && a->nb > a->next->next->nb)
-        rra(a);
-    if (a->nb < a->next->nb && a->next->nb > a->next->next->nb && a->nb < a->next->next->nb) 
+    else if (a->nb < a->next->nb && a->next->nb > a->next->next->nb && a->nb > a->next->next->nb)
+        a = rra(a);
+    else if (a->nb < a->next->nb && a->next->nb > a->next->next->nb && a->nb < a->next->next->nb) 
     {
-        rra(a);
+        a = rra(a);
         sa(a);
     }
-    if (a->nb > a->next->nb && a->next->nb > a->next->next->nb)
+    else if (a->nb > a->next->nb && a->next->nb > a->next->next->nb)
     {
         ra(a);
-        ra(a);
+        sa(a);
     }
 
-    printf("%ld-",a->nb);
-    printf("%ld-",a->next->nb);
-    printf("%ld",a->next->next->nb);
+    printf("\ndis1:%ld",a->nb);
+    printf(" \ndis2:%ld",a->next->nb);
+    printf(" \ndis3:%ld",a->next->next->nb);
     return (a);
 }

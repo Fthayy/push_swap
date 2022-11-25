@@ -7,7 +7,7 @@ SRCS		=	four_sort.c \
 
 OBJS		= $(SRCS:%.c=%.o)
 
-FLAGS		= -Wall -Wextra -Werror
+FLAGS		= -Wall -Wextra -Werror -g
 
 $(NAME):
 	gcc $(FLAGS) -c $(SRCS) -I./

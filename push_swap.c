@@ -151,16 +151,15 @@ int main(int ac,char **av)
     int size;
     t_stack *a_stack;
     int *numeros;
+    int *b_stack;
 
     if (ac > 1)
     {
         size = find_size(av);
         numbers = get_numbers(av);
-        // printf("numbers:%s\n",numbers);
         numeros = ft_prime_atoi(numbers,size);
-        //printf("numeros:%d\n",numeros[0]);
         a_stack = new_funct(numeros,size);
-        //printf("%ld",a_stack->next->nb);
+        b_stack = new_funct(numeros,size);
         choose_method(size,a_stack);
     }
     return (0);
