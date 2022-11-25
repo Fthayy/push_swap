@@ -2,11 +2,6 @@
 
 t_stack *three_sort(t_stack *a)
 {
-    printf("%ld-",a->nb);
-    printf("%ld-",a->next->nb);
-    printf("%ld\n",a->next->next->nb);
-
-
     if (a->nb > a->next->nb && a->next->nb < a->next->next->nb && a->nb > a->next->next->nb)
         ra(a);
     else if (a->nb > a->next->nb && a->next->nb < a->next->next->nb && a->nb < a->next->next->nb)

@@ -4,6 +4,7 @@ SRCS		=	four_sort.c \
 				functions.c \
 				three_sort.c \
 				two_sort.c \
+				push_swap.c \
 
 OBJS		= $(SRCS:%.c=%.o)
 

@@ -102,31 +102,32 @@ void rrr(t_stack *a,t_stack *b)
 
 void pb(t_stack *a,t_stack *b) // A'nın ilk elemanını B'nin ilk elemanı haline getiriyoruz. B boşsa hic bisi yapma.
 {
-    if(a != NULL)
+    t_stack *tmp;
+
+    tmp = b->next;
+    if (a == NULL)
+        a = b;
+    else
     {
-        t_stack *tmp;
-        t_stack *tmpprev;
-        
+        ft_lstlastnmb(a)->next = ft_lstnmb(b->nb);
+        free(b);
+        b = tmp;
     }
 }
 
 void pa(t_stack *a, t_stack *b) // A'nın ilk elemanını B'nin ilk elemanı haline getiriyoruz. B boşsa hic bisi yapma.
 {
-    
-        t_stack *tmp;
-        t_stack *tmpprev;
+    t_stack *tmp;
 
-        tmp = a;
-        tmpprev = a->prev;
-        a = b;
-        a->next = tmp;
-        a->prev = tmpprev;
-        a->prev->next = a;
-        tmpprev = b->prev;
-        b = b->next;
-        b->prev = tmpprev;
-        b->prev->next = b;
-
-        free(tmp);
-        free(tmpprev);
+    tmp = a->next;
+    if (b == NULL)
+        b = a;
+    else
+    {
+        ft_lstlastnmb(b)->next = ft_lstnmb(a->nb);
+        free(a);
+        a = tmp;
+    }
+    printf("b:%ld\n",b->nb);
+    printf("a:%ld\n",a->nb);
 }

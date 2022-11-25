@@ -114,10 +114,8 @@ t_stack *new_funct(int *numbers,int size)
     return (a);
 }
 
-void choose_method(int size,t_stack *a_stack)
+void choose_method(int size,t_stack *a_stack,t_stack *b_stack)
 {
-    t_stack *b_stack;
-
     if (size == 2)
         two_sort(a_stack);
     else if (size == 3)
@@ -151,7 +149,7 @@ int main(int ac,char **av)
     int size;
     t_stack *a_stack;
     int *numeros;
-    int *b_stack;
+    t_stack *b_stack;
 
     if (ac > 1)
     {
@@ -160,7 +158,7 @@ int main(int ac,char **av)
         numeros = ft_prime_atoi(numbers,size);
         a_stack = new_funct(numeros,size);
         b_stack = new_funct(numeros,size);
-        choose_method(size,a_stack);
+        choose_method(size,a_stack,b_stack);
     }
     return (0);
 }
