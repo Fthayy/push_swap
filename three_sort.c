@@ -18,9 +18,6 @@ t_stack *three_sort(t_stack *a)
         ra(a);
         sa(a);
     }
-
-    printf("\ndis1:%ld",a->nb);
-    printf(" \ndis2:%ld",a->next->nb);
-    printf(" \ndis3:%ld",a->next->next->nb);
+    
     return (a);
 }

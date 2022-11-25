@@ -100,25 +100,36 @@ void rrr(t_stack *a,t_stack *b)
     rrb(b);
 }
 
-void pb(t_stack *a,t_stack *b) // A'nın ilk elemanını B'nin ilk elemanı haline getiriyoruz. B boşsa hic bisi yapma.
+t_holder *pb(t_stack *a, t_stack *b)
 {
-    t_stack *tmp;
-
-    tmp = b->next;
+    t_holder *holder;
+    holder = malloc(sizeof(t_holder)); 
     if (a == NULL)
         a = b;
     else
     {
-        ft_lstlastnmb(a)->next = ft_lstnmb(b->nb);
-        free(b);
-        b = tmp;
+        a->prev = ft_lstnmb(b->nb);
+        a->prev->next = a;
+        a = a->prev;
+        printf("badress:%p\n",b->next->next->next->next);
+        if (b->next == NULL)
+            free(b);
+        else
+            free(b);
+            b = b->next;
     }
+    printf("b:%ld\n",b->nb);
+    printf("a:%ld\n",a->nb);
+    holder->a = a;
+    holder->b = b;
+    return(holder);
 }
 
-void pa(t_stack *a, t_stack *b) // A'nın ilk elemanını B'nin ilk elemanı haline getiriyoruz. B boşsa hic bisi yapma.
+t_holder *pa(t_stack *a, t_stack *b)
 {
     t_stack *tmp;
-
+    t_holder *holder;
+    holder = malloc(sizeof(t_holder)); 
     tmp = a->next;
     if (b == NULL)
         b = a;
@@ -130,4 +141,7 @@ void pa(t_stack *a, t_stack *b) // A'nın ilk elemanını B'nin ilk elemanı hal
     }
     printf("b:%ld\n",b->nb);
     printf("a:%ld\n",a->nb);
+    holder->a = a;
+    holder->b = b;
+    return(holder);
 }

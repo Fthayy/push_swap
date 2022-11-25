@@ -12,10 +12,16 @@ typedef struct s_stack
     long int    nb;
     struct  s_stack *next;
     struct  s_stack *prev;
-}                   t_stack;
+}                  t_stack;
 
-void        pb(t_stack *a, t_stack *b);
-void        pa(t_stack *a, t_stack *b);
+typedef struct s_holder
+{
+            t_stack *a;
+            t_stack *b;
+}               t_holder;
+
+t_holder*        pb(t_stack *a, t_stack *b);
+t_holder*        pa(t_stack *a, t_stack *b);
 void        sa(t_stack *a);
 void        sb(t_stack *b);
 void        ss(t_stack *a);
