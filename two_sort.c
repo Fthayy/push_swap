@@ -3,6 +3,6 @@
 t_stack *two_sort(t_stack *a)
 {
     if(a->nb > a->next->nb)
-        printf("ra");//ra(a);
+        ra(a);
     return(a);
 }

@@ -152,18 +152,15 @@ int main(int ac,char **av)
     t_stack *b_stack;
     int *sortednumbers;
     
-    
     if (ac > 1)
     {
         size = find_size(av);
         numbers = get_numbers(av);
         numeros = ft_prime_atoi(numbers,size);
         find_longest(numeros,size);
-        int i= 0;
         a_stack = new_funct(numeros,size);
         b_stack = new_funct(numeros,size);
         sortednumbers = BubbleSort(numeros,size);
-        i = 0;
         choose_method(size,a_stack,b_stack);
     }
     return (0);

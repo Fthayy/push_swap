@@ -111,7 +111,7 @@ void rrr(t_stack *a,t_stack *b)
     printf("rrr\n");
 }
 
-t_holder *pb(t_stack *a, t_stack *b)
+t_holder *pa(t_stack *a, t_stack *b)
 {
     t_holder *holder;
     holder = malloc(sizeof(t_holder)); 
@@ -130,11 +130,11 @@ t_holder *pb(t_stack *a, t_stack *b)
     }
     holder->a = a;
     holder->b = b;
-    printf("pb\n");
+    printf("pa\n");
     return(holder);
 }
 
-t_holder *pa(t_stack *a, t_stack *b)
+t_holder *pb(t_stack *a, t_stack *b)
 {
     t_stack *tmp;
     t_holder *holder;
@@ -150,6 +150,6 @@ t_holder *pa(t_stack *a, t_stack *b)
     }
     holder->a = a;
     holder->b = b;
-    printf("pa\n");
+    printf("pb\n");
     return(holder);
 }

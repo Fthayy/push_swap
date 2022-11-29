@@ -46,5 +46,6 @@ t_stack	*ft_lstlastnmb(t_stack *lst);
 t_stack	*ft_lstnmb(long int nbr);
 int *BubbleSort(int *numeros,int size);
 void find_longest(int *numeros,int size);
+int *ft_sort_number(int *numeros,int size);
 
 #endif
