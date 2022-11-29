@@ -10,6 +10,7 @@ void sa(t_stack *a)
         a->nb =a->next->nb;
         a->next->nb = tmp;
     }
+    printf("sa\n");
 }
 
 void sb(t_stack *b)
@@ -21,12 +22,14 @@ void sb(t_stack *b)
         b->nb=b->next->nb;
         b->next->nb = tmp;
     }
+    printf("sb\n");
 }
 
 void ss(t_stack *a)
 {
     sa(a);
     sb(a);
+    printf("ss\n");
 }
 
 void ra(t_stack *a)
@@ -45,6 +48,8 @@ void ra(t_stack *a)
     a = tmp2;
     if (tmp->next == NULL)
         ft_lstlastnmb(a)->nb = hold;
+
+    printf("ra\n");
 }
 
 void rb(t_stack *b)
@@ -63,12 +68,14 @@ void rb(t_stack *b)
     b = tmp2;
     if (tmp->next == NULL)
         ft_lstlastnmb(b)->nb = hold;
+    printf("rb\n");
 }
 
 void rr(t_stack *a,t_stack *b)
 {
     rb(b);
     ra(a);
+    printf("rr\n");
 }
 
 t_stack* rrb(t_stack *b)
@@ -80,7 +87,9 @@ t_stack* rrb(t_stack *b)
     son->prev->next = NULL;
     b = son;
     son->next = ilk;
+    printf("rrb\n");
     return(b);
+    
 }
 t_stack *rra(t_stack *a)
 {
@@ -91,6 +100,7 @@ t_stack *rra(t_stack *a)
     son->prev->next = NULL;
     a = son;
     son->next = ilk;
+    printf("rra\n");
     return(a);
 }
 
@@ -98,6 +108,7 @@ void rrr(t_stack *a,t_stack *b)
 {
     rra(a);
     rrb(b);
+    printf("rrr\n");
 }
 
 t_holder *pb(t_stack *a, t_stack *b)
@@ -111,17 +122,15 @@ t_holder *pb(t_stack *a, t_stack *b)
         a->prev = ft_lstnmb(b->nb);
         a->prev->next = a;
         a = a->prev;
-        printf("badress:%p\n",b->next->next->next->next);
         if (b->next == NULL)
             free(b);
         else
             free(b);
             b = b->next;
     }
-    printf("b:%ld\n",b->nb);
-    printf("a:%ld\n",a->nb);
     holder->a = a;
     holder->b = b;
+    printf("pb\n");
     return(holder);
 }
 
@@ -139,9 +148,8 @@ t_holder *pa(t_stack *a, t_stack *b)
         free(a);
         a = tmp;
     }
-    printf("b:%ld\n",b->nb);
-    printf("a:%ld\n",a->nb);
     holder->a = a;
     holder->b = b;
+    printf("pa\n");
     return(holder);
 }

@@ -8,11 +8,6 @@ t_stack *four_sort(t_stack *a,t_stack *b)
     hold->b = b;
     hold = pa(hold->a,hold->b);
     hold->a = three_sort(hold->a);
-    printf("\ndis1:%ld",hold->a->nb);
-    printf(" \ndis2:%ld",hold->a->next->nb);
-    printf(" \ndis3:%ld",hold->a->next->next->nb);
-    printf(" \ndis4:%p",hold->a->next->next->next);
-    printf("\na:%ld\n",hold->a->nb);
 
 
     if (hold->b->nb < hold->a->nb)
@@ -35,10 +30,5 @@ t_stack *four_sort(t_stack *a,t_stack *b)
         hold = pb(hold->a,hold->b);
         ra(hold->a);
     }
-    printf("\ndisb1:%p",hold->b->next);
-    printf("\ndis1:%ld",hold->a->nb);
-    printf(" \ndis2:%ld",hold->a->next->nb);
-    printf(" \ndis3:%ld",hold->a->next->next->nb);
-    printf(" \ndis4:%ld",hold->a->next->next->next->nb);
     return (a);
 }
