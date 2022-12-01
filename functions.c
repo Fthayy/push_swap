@@ -111,45 +111,51 @@ void rrr(t_stack *a,t_stack *b)
     printf("rrr\n");
 }
 
-t_holder *pa(t_stack *a, t_stack *b)
-{
-    t_holder *holder;
-    holder = malloc(sizeof(t_holder)); 
-    if (a == NULL)
-        a = b;
-    else
-    {
-        a->prev = ft_lstnmb(b->nb);
-        a->prev->next = a;
-        a = a->prev;
-        if (b->next == NULL)
-            free(b);
-        else
-            free(b);
-            b = b->next;
-    }
-    holder->a = a;
-    holder->b = b;
-    printf("pa\n");
-    return(holder);
-}
-
-t_holder *pb(t_stack *a, t_stack *b)
+t_holder *pa(t_holder *hold)
 {
     t_stack *tmp;
-    t_holder *holder;
-    holder = malloc(sizeof(t_holder)); 
-    tmp = a->next;
-    if (b == NULL)
-        b = a;
+    t_stack *tmp2;
+    tmp = hold->b->next;
+    hold->b->next = NULL;
+    if (hold->a_size == 0)
+    {
+        hold->a = hold->b;
+        hold->b = tmp;
+    }
     else
     {
-        ft_lstlastnmb(b)->next = ft_lstnmb(a->nb);
-        free(a);
-        a = tmp;
+        tmp2 = hold->a;
+        hold->a = hold->b;
+        hold->a->next = tmp2;
+        hold->b = tmp;
     }
-    holder->a = a;
-    holder->b = b;
+    hold->a_size += 1;
+    hold->b_size -= 1;
+    printf("pa\n");
+    return(hold);
+}
+
+t_holder *pb(t_holder *hold)
+{
+    t_stack *tmp;
+    t_stack *tmp2;
+    tmp = hold->a->next;
+    hold->a->next = NULL;
+    if (hold->b_size == 0)
+    {
+        hold->b = hold->a;
+        hold->a = tmp;
+    }
+    else
+    {
+        tmp2 = hold->b;
+        hold->b = hold->a;
+        hold->b->next = tmp;
+        hold->a = tmp;
+    }
+
+    hold->a_size -= 1;
+    hold->b_size += 1;
     printf("pb\n");
-    return(holder);
+    return(hold);
 }

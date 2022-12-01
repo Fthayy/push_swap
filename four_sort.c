@@ -1,34 +1,29 @@
 #include "push_swap.h"
 
-t_stack *four_sort(t_stack *a,t_stack *b)
+t_holder *four_sort(t_holder *hold)
 {
-    t_holder *hold;
-    hold = malloc(sizeof(t_holder));
-    hold->a = a;
-    hold->b = b;
-    hold = pb(hold->a,hold->b);
+    hold = pb(hold);
     hold->a = three_sort(hold->a);
-
-
+    
     if (hold->b->nb < hold->a->nb)
-        hold = pa(hold->a,hold->b);
+        hold = pa(hold);
     else if (hold->b->nb > hold->a->nb && hold->b->nb < hold->a->next->nb)
     {
         ra(hold->a);
-        hold = pa(hold->a,hold->b);
+        hold = pa(hold);
         hold->a = rra(hold->a);
     }
     else if (hold->b->nb > hold->a->next->nb && hold->b->nb < hold->a->next->next->nb)
     {
         hold->a = rra(hold->a);
-        hold = pa(hold->a,hold->b);
+        hold = pa(hold);
         ra(hold->a);
         ra(hold->a);
     }
     else if(hold->b->nb > hold->a->next->next->nb)
     {
-        hold = pa(hold->a,hold->b);
+        hold = pa(hold);
         ra(hold->a);
     }
-    return (a);
+    return (hold);
 }

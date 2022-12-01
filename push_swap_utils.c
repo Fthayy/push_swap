@@ -31,7 +31,7 @@ t_longest while_loop(t_longest longest,int size,int *numeros,int i)
     return(longest);
 }
 
-void find_longest(int *numeros,int size)
+t_longest find_longest(int *numeros,int size)
 {
     t_longest longest;
     int i;
@@ -44,6 +44,7 @@ void find_longest(int *numeros,int size)
 
     size = size - 1;
     longest = while_loop(longest,size,numeros,i);
+    return(longest);
 }
 
 int *BubbleSort(int *numeros,int size)

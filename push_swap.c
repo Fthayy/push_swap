@@ -114,8 +114,14 @@ t_stack *new_funct(int *numbers,int size)
     return (a);
 }
 
-void choose_method(int size,t_stack *a_stack,t_stack *b_stack)
+void choose_method(int size,t_stack *a_stack,t_stack *b_stack,t_longest longest,int *numeros,int *sortednumbers)
 {
+    t_holder *hold;
+    hold = malloc(sizeof(t_holder));
+    hold->a = a_stack;
+    hold->b = b_stack;
+    hold->a_size= size;
+    hold->b_size = 0;
     if (size == 2)
         two_sort(a_stack);
     else if (size == 3)
@@ -123,7 +129,9 @@ void choose_method(int size,t_stack *a_stack,t_stack *b_stack)
         three_sort(a_stack);
     }
     else if (size == 4)
-        four_sort(a_stack,b_stack);
+        four_sort(hold);
+    else
+        big_sort(hold,numeros,size,longest,sortednumbers);
 }
 
 int	*ft_prime_atoi(char *numbers,int size)
@@ -151,17 +159,19 @@ int main(int ac,char **av)
     int *numeros;
     t_stack *b_stack;
     int *sortednumbers;
+    t_longest longest;
     
     if (ac > 1)
     {
         size = find_size(av);
         numbers = get_numbers(av);
         numeros = ft_prime_atoi(numbers,size);
-        find_longest(numeros,size);
+        longest = find_longest(numeros,size);
         a_stack = new_funct(numeros,size);
-        b_stack = new_funct(numeros,size);
+        b_stack = malloc(sizeof(t_list));
         sortednumbers = BubbleSort(numeros,size);
-        choose_method(size,a_stack,b_stack);
+
+        choose_method(size,a_stack,b_stack,longest,numeros,sortednumbers);
     }
     return (0);
 }
