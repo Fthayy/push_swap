@@ -53,7 +53,7 @@ t_stack *three_sort(t_stack *a);
 t_holder *four_sort(t_holder *hold);
 t_stack *two_sort(t_stack *a);
 t_stack	*ft_lstlastnmb(t_stack *lst);
-t_stack	*ft_lstnmb(long int nbr);
+t_stack	*ft_lstnmb(int nbr);
 int *BubbleSort(int *numeros,int size);
 t_longest find_longest(int *numeros,int size);
 int *ft_sort_number(int *numeros,int size);

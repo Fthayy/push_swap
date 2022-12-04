@@ -7,36 +7,46 @@
 // Egere hem A'daki yeriyle B'deki yerinin size / 2 kısımı aynı taraftaysa konumu gelene kadar veya en uste
 // gelene kadar rrr veya rr yap.
 
-int FindRank(int *sortednumbers,t_holder *hold)
-{
-    t_stack *tmp = hold->b;
+int FindRank(int *sortednumbers,int nb)
+{   
     int i = 0;
-    while (i < 15)
+    while (i < 500)
     {
-        if (tmp->nb == sortednumbers[i])
+        if (nb == sortednumbers[i])
             return (i);
+        // printf("%d",i);
+        // printf("sortednumbers[i]=%d\n",sortednumbers[i]);
         i++;
     }
     return (0);
 }
 
-int ft_loc(int *sortednumbers,int rank,t_holder *hold)
+int ft_loc(int *sortednumbers, t_holder *hold,int rank) // AMAC gonderilen sayının rankından kucuk ve yakın olan sortednumbers degerini bulmak
 {
-    int i = 0;
-    t_stack *tmp = hold->a;
-    while(hold->a_size != 0)
+    int ret;
+    int i;
+    t_stack *tmp2;
+    t_stack *tmp3;
+    int x;
+
+    tmp3 = hold->a;
+    tmp2 = hold->b;
+    ret = 500;
+    i = 0;
+    while (i < hold->a_size)
     {
-        if(sortednumbers[rank] == tmp->nb)
+        // printf("check:%d\n",(FindRank(sortednumbers,tmp3->nb) - rank));
+        if (((FindRank(sortednumbers,tmp3->nb) - rank < ret - rank)) && ((FindRank(sortednumbers,tmp3->nb) - rank) > 0))  
         {
-            if (i > hold->a_size / 2)
-                return (hold->a_size - i);
-            return(i);
+            ret = FindRank(sortednumbers,tmp3->nb);
+            x = i;
         }
-        tmp = tmp->next;
         i++;
+        tmp3 = tmp3->next;
     }
-    return (0);
+    return(x);
 }
+
 
 
 
@@ -44,65 +54,72 @@ t_location FindLoc(int *sortednumbers,t_holder *hold)
 {
     t_stack *tmp;
     t_location location;
+    int x;
 
+    x = hold->b_size;
     tmp = hold->b;
     location.rank = 0;
     location.tmp_rank = 0;
     location.place = 0;
     location.tmp_place = 0;
-    while (hold->b_size != 0)
+    while (x > 0)
     {
-        location.rank = FindRank(sortednumbers,hold);
-        location.place = ft_loc(sortednumbers,location.rank,hold);
-        if ((location.rank + location.place < location.tmp_rank + location.tmp_place) ||(location.tmp_place + location.tmp_rank == 0))
+        printf("tmpnb:%ld\n",tmp->nb);
+        location.rank = FindRank(sortednumbers,tmp->nb);
+        printf("location.rank:%d\n",location.rank);
+        location.place = ft_loc(sortednumbers,hold,location.rank);
+        printf("location.place:%d\n",location.place);
+        if ((location.rank + location.place < location.tmp_rank + location.tmp_place) || (location.tmp_place + location.tmp_rank == 0))
         {
             location.tmp_rank = location.rank;
             location.tmp_place = location.place;
         }
         tmp = tmp->next;
+        x--;
     }
     return(location);
 }
 
-// void findAPlace(t_holder *hold,t_location location) // Location bulup B'yi pushladıktan sonra ne yapacak belli degil ?
-// {
-//     int i = 0;
-//     while (hold->a_size != 0) // A bitmedigi surece ???????
-//     {
-//         if (location.rank > hold->b_size / 2) // eger A'nin ortasından asagidaysa rra kullan
-//         {
-//             while (i++ < hold->b_size - location.rank)
-//                 rra(hold->a);
-//         }
-//         else // eger A'nin ortasından yukarıdaysa ra kullan
-//         {
-//             while (i++ < location.rank)
-//                 ra(hold->a);
-//         }
-//         findAPlace(hold,location);
-//     }
-// }
+void findAPlace(t_holder *hold,t_location location) // Location bulup B'yi pushladıktan sonra ne yapacak belli degil ?
+{
+    int i = 0;
+    while (hold->a_size != 0) // A bitmedigi surece ???????
+    {
+        if (location.rank > hold->b_size / 2) // eger A'nin ortasından asagidaysa rra kullan
+        {
+            while (i++ < hold->b_size - location.rank)
+                rra(hold->a);
+        }
+        else // eger A'nin ortasından yukarıdaysa ra kullan
+        {
+            while (i++ < location.rank)
+                ra(hold->a);
+        }
+        findAPlace(hold,location);
+    }
+}
 
 void ft_PushBtoA(t_holder *hold,int *sortednumbers)
 {
-    int i = 0;
+    // int i = 0;  
+    // int x = 0;
     t_location location;
     location = FindLoc(sortednumbers,hold);
-    while (hold->b_size != 0) // B bitmedigi surece
-    {
-        if (location.rank > hold->b_size / 2) // eger B'nin ortasından asagidaysa rra kullan
-        {
-            while (i++ < hold->b_size - location.rank)
-                rrb(hold->b);
-        }
-        else // eger B'nin ortasından yukarıdaysa ra kullan
-        {
-            while (i++ < location.rank)
-                rb(hold->b);
-        }
-        findAPlace(hold,location);
-        pb(hold); // Deger en yukarı geldikten sonra A'ya pushla
-    }
+    // while (x++ < hold->b_size) // B bitmedigi surece || burayı fixlemen lazım 
+    // {
+    //     if (location.rank > hold->b_size / 2) // eger B'nin ortasından asagidaysa rra kullan
+    //     {
+    //         while (i++ < hold->b_size - location.rank)
+    //             rrb(hold->b);
+    //     }
+    //     else // eger B'nin ortasından yukarıdaysa ra kullan
+    //     {
+    //         while (i++ < location.rank)
+    //             rb(hold->b);
+    //     }
+    //     findAPlace(hold,location);
+    //     pb(hold); // Deger en yukarı geldikten sonra A'ya pushla
+    // }
 }
 
 void big_sort(t_holder *hold,int *numeros,int size,t_longest longest,int *sortednumbers)
@@ -111,7 +128,6 @@ void big_sort(t_holder *hold,int *numeros,int size,t_longest longest,int *sorted
     int i = 0;
     int x = 0;
     tmp = hold->a;
-    sortednumbers = numeros;
     while(i < size - (longest.tmpend - longest.tmpstart))
     {
         if (hold->a->nb < numeros[longest.tmpstart])
@@ -130,8 +146,8 @@ void big_sort(t_holder *hold,int *numeros,int size,t_longest longest,int *sorted
                 x++;
             }
         else
-            pb(hold); 
+            pb(hold);
         i++;
     }
-    // ft_PushBtoA(hold,sortednumbers); // B'den A'ya pushlama asamasi
+    ft_PushBtoA(hold,sortednumbers); // B'den A'ya pushlama asamasi
 }

@@ -145,12 +145,12 @@ t_holder *pb(t_holder *hold)
     {
         hold->b = hold->a;
         hold->a = tmp;
-    }
+    }   
     else
     {
         tmp2 = hold->b;
         hold->b = hold->a;
-        hold->b->next = tmp;
+        hold->b->next = tmp2;
         hold->a = tmp;
     }
 

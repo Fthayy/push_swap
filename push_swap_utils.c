@@ -76,7 +76,7 @@ int *ft_sort_number(int *numeros,int size)
     int i = 0;
     int *sortednumbers;
     sortednumbers = malloc(sizeof(int)*size);
-    while(i < 5)
+    while(i < size)
     {
         sortednumbers[i] = numeros[i];
         i++;

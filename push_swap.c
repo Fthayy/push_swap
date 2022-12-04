@@ -63,7 +63,7 @@ t_stack	*ft_lstlastnmb(t_stack *lst)
 	return (tmp);
 }
 
-t_stack	*ft_lstnmb(long int nbr)
+t_stack	*ft_lstnmb(int nbr)
 {
 	t_stack	*new;
 
@@ -146,6 +146,7 @@ int	*ft_prime_atoi(char *numbers,int size)
     while (tmp[y])
     {
         numeros[y] = ft_atoi(tmp[y]);
+        printf("%d-",numeros[y]);
         y++;
     }
     return (numeros);
@@ -168,9 +169,14 @@ int main(int ac,char **av)
         numeros = ft_prime_atoi(numbers,size);
         longest = find_longest(numeros,size);
         a_stack = new_funct(numeros,size);
-        b_stack = malloc(sizeof(t_list));
+        b_stack = malloc(sizeof(t_stack));
         sortednumbers = BubbleSort(numeros,size);
-
+        // int y = 0;
+        // while (y < 8)
+        // {
+        //     printf("first:%d ",sortednumbers[y]);
+        //     y++;
+        // }
         choose_method(size,a_stack,b_stack,longest,numeros,sortednumbers);
     }
     return (0);
