@@ -36,6 +36,8 @@ typedef struct s_location
     int tmp_rank;
     int place;
     int tmp_place;
+    int holdrank;
+    int holdplace;
 }   t_location;
 
 t_holder*        pb(t_holder *hold);

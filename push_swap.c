@@ -146,7 +146,6 @@ int	*ft_prime_atoi(char *numbers,int size)
     while (tmp[y])
     {
         numeros[y] = ft_atoi(tmp[y]);
-        printf("%d-",numeros[y]);
         y++;
     }
     return (numeros);

@@ -47,14 +47,21 @@ int ft_loc(int *sortednumbers, t_holder *hold,int rank) // AMAC gonderilen sayı
     return(x);
 }
 
-
-
+int howbig(int size,int nb)
+{
+    if (nb > size / 2)
+        return(size - nb);
+    return(nb);
+}
 
 t_location FindLoc(int *sortednumbers,t_holder *hold)
 {
     t_stack *tmp;
     t_location location;
     int x;
+    int i;
+    int z;
+    i = 0;
 
     x = hold->b_size;
     tmp = hold->b;
@@ -64,62 +71,98 @@ t_location FindLoc(int *sortednumbers,t_holder *hold)
     location.tmp_place = 0;
     while (x > 0)
     {
-        printf("tmpnb:%ld\n",tmp->nb);
-        location.rank = FindRank(sortednumbers,tmp->nb);
-        printf("location.rank:%d\n",location.rank);
-        location.place = ft_loc(sortednumbers,hold,location.rank);
-        printf("location.place:%d\n",location.place);
-        if ((location.rank + location.place < location.tmp_rank + location.tmp_place) || (location.tmp_place + location.tmp_rank == 0))
-        {
-            location.tmp_rank = location.rank;
+        z = howbig(hold->b_size,i);
+        // printf("tmpnb:%ld\n",tmp->nb);
+        location.rank = FindRank(sortednumbers,tmp->nb); // asagıdaki if blokunda kullanmayacagız location.place'de isimize yarıyor if blogu icin farklı bir fonk yaz.
+        // printf("location.rank:%d\n",location.rank);
+        location.place = howbig(hold->a_size,ft_loc(sortednumbers,hold,location.rank)); // kullanacagımız veri ama size/2'den buyuk olma durumunu da hesapla
+        // printf("location.place:%d\n",location.place);
+        if ((z + location.place < z + location.tmp_place) || (location.tmp_place + z == 0))
+        {   
+            location.holdplace = ft_loc(sortednumbers,hold,location.rank); // asagıda kullan
+            location.holdrank = i; // asagida kullan
+            location.tmp_rank = z;
             location.tmp_place = location.place;
         }
         tmp = tmp->next;
         x--;
+        i++;
     }
     return(location);
 }
 
-void findAPlace(t_holder *hold,t_location location) // Location bulup B'yi pushladıktan sonra ne yapacak belli degil ?
+int WhichOneBigger(int nb1,int nb2)
 {
-    int i = 0;
-    while (hold->a_size != 0) // A bitmedigi surece ???????
+    if (nb1 > nb2)
+        return(nb2);
+    return(nb1);
+}
+
+void PushHelper(int rank,int place,t_holder *hold)
+{
+    int i;
+
+    i = 0;
+    if (rank > place)
     {
-        if (location.rank > hold->b_size / 2) // eger A'nin ortasından asagidaysa rra kullan
+        while (i < rank - place)
         {
-            while (i++ < hold->b_size - location.rank)
-                rra(hold->a);
+            rra(hold->a);
         }
-        else // eger A'nin ortasından yukarıdaysa ra kullan
+    }
+    if (rank < place)
+    {
+        while (i < place - rank)
         {
-            while (i++ < location.rank)
-                ra(hold->a);
+            rrb(hold->b);
         }
-        findAPlace(hold,location);
     }
 }
 
+void PushHelper2(int rank,int place,t_holder *hold)
+{
+    int i;
+
+    i = 0;
+    if (rank > place)
+    {
+        while (i < rank - place)
+        {
+            ra(hold->a);
+            i++;
+        }
+    }
+    if (rank < place)
+    {
+        while (i < place - rank)
+        {
+            rb(hold->b);
+            i++;
+        }
+    }
+}
 void ft_PushBtoA(t_holder *hold,int *sortednumbers)
 {
-    // int i = 0;  
-    // int x = 0;
+    int i = 0;  
+    int x = 0;
     t_location location;
-    location = FindLoc(sortednumbers,hold);
-    // while (x++ < hold->b_size) // B bitmedigi surece || burayı fixlemen lazım 
-    // {
-    //     if (location.rank > hold->b_size / 2) // eger B'nin ortasından asagidaysa rra kullan
-    //     {
-    //         while (i++ < hold->b_size - location.rank)
-    //             rrb(hold->b);
-    //     }
-    //     else // eger B'nin ortasından yukarıdaysa ra kullan
-    //     {
-    //         while (i++ < location.rank)
-    //             rb(hold->b);
-    //     }
-    //     findAPlace(hold,location);
-    //     pb(hold); // Deger en yukarı geldikten sonra A'ya pushla
-    // }
+     while (x++ < hold->b_size) 
+     { 
+        location = FindLoc(sortednumbers,hold);
+        if (location.holdrank > hold->b_size / 2 && location.holdplace > hold->b_size)
+        {
+            while (i++ < WhichOneBigger(location.holdplace,location.holdplace))
+                rrr(hold->a,hold->b);
+            PushHelper(location.holdrank,location.holdplace,hold);
+        }
+        else if (location.holdrank < hold->b_size / 2 && location.holdplace < hold->b_size)
+        {
+            while (i++ < WhichOneBigger(location.holdplace,location.holdplace))
+                rr(hold->a,hold->b);
+            PushHelper2(location.holdrank,location.holdplace,hold);
+        }
+        // pb(hold); // Deger en yukarı geldikten sonra A'ya pushla
+    }
 }
 
 void big_sort(t_holder *hold,int *numeros,int size,t_longest longest,int *sortednumbers)
