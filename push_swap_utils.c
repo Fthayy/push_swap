@@ -10,7 +10,7 @@ t_longest while_loop(t_longest longest,int size,int *numeros,int i)
 {
     while (i != size)
     {
-        while (i != size && numeros[i] > numeros[i+1])
+        while (i != size && numeros[i] > numeros[i+1] )
         {
           i++;
           longest.end++;

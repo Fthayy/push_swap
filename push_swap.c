@@ -126,12 +126,13 @@ void choose_method(int size,t_stack *a_stack,t_stack *b_stack,t_longest longest,
         two_sort(a_stack);
     else if (size == 3)
     {
-        three_sort(a_stack);
+        three_sort(hold);
     }
     else if (size == 4)
         four_sort(hold);
     else
-        big_sort(hold,numeros,size,longest,sortednumbers);
+       big_sort(hold,numeros,size,longest,sortednumbers);
+        
 }
 
 int	*ft_prime_atoi(char *numbers,int size)
@@ -170,12 +171,7 @@ int main(int ac,char **av)
         a_stack = new_funct(numeros,size);
         b_stack = malloc(sizeof(t_stack));
         sortednumbers = BubbleSort(numeros,size);
-        // int y = 0;
-        // while (y < 8)
-        // {
-        //     printf("first:%d ",sortednumbers[y]);
-        //     y++;
-        // }
+        a_stack->prev = ft_lstlastnmb(a_stack);
         choose_method(size,a_stack,b_stack,longest,numeros,sortednumbers);
     }
     return (0);

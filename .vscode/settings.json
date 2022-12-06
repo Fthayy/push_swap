@@ -16,6 +16,7 @@
         "unordered_map": "c",
         "unordered_set": "c",
         "utility": "c",
-        "vector": "c"
+        "vector": "c",
+        "iterator": "c"
     }
 }

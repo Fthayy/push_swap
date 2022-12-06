@@ -1,23 +1,23 @@
 #include "push_swap.h"
 
-t_stack *three_sort(t_stack *a)
+t_stack *three_sort(t_holder *hold)
 {
-    if (a->nb > a->next->nb && a->next->nb < a->next->next->nb && a->nb > a->next->next->nb)
-        ra(a);
-    else if (a->nb > a->next->nb && a->next->nb < a->next->next->nb && a->nb < a->next->next->nb)
-        sa(a);
-    else if (a->nb < a->next->nb && a->next->nb > a->next->next->nb && a->nb > a->next->next->nb)
-        a = rra(a);
-    else if (a->nb < a->next->nb && a->next->nb > a->next->next->nb && a->nb < a->next->next->nb) 
+    if (hold->a->nb > hold->a->next->nb && hold->a->next->nb < hold->a->next->next->nb && hold->a->nb > hold->a->next->next->nb)
+        ra(hold->a);
+    else if (hold->a->nb > hold->a->next->nb && hold->a->next->nb < hold->a->next->next->nb && hold->a->nb < hold->a->next->next->nb)
+        sa(hold->a);
+    else if (hold->a->nb < hold->a->next->nb && hold->a->next->nb > hold->a->next->next->nb && hold->a->nb > hold->a->next->next->nb)
+        hold->a = rra(hold);
+    else if (hold->a->nb < hold->a->next->nb && hold->a->next->nb > hold->a->next->next->nb && hold->a->nb < hold->a->next->next->nb) 
     {
-        a = rra(a);
-        sa(a);
+        hold->a = rra(hold);
+        sa(hold->a);
     }
-    else if (a->nb > a->next->nb && a->next->nb > a->next->next->nb)
+    else if (hold->a->nb > hold->a->next->nb && hold->a->next->nb > hold->a->next->next->nb)
     {
-        ra(a);
-        sa(a);
+        ra(hold->a);
+        sa(hold->a);
     }
     
-    return (a);
+    return (hold->a);
 }

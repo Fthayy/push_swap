@@ -3,7 +3,7 @@
 t_holder *four_sort(t_holder *hold)
 {
     hold = pb(hold);
-    hold->a = three_sort(hold->a);
+    hold->a = three_sort(hold);
     
     if (hold->b->nb < hold->a->nb)
         hold = pa(hold);
@@ -11,11 +11,11 @@ t_holder *four_sort(t_holder *hold)
     {
         ra(hold->a);
         hold = pa(hold);
-        hold->a = rra(hold->a);
+        hold->a = rra(hold);
     }
     else if (hold->b->nb > hold->a->next->nb && hold->b->nb < hold->a->next->next->nb)
     {
-        hold->a = rra(hold->a);
+        hold->a = rra(hold);
         hold = pa(hold);
         ra(hold->a);
         ra(hold->a);
