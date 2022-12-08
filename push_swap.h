@@ -81,5 +81,5 @@ void				big_sort(t_holder *hold, t_numbers *num, int size,
 char				*get_numbers(char **av);
 int					find_size(char **av);
 t_stack				*ft_prev(t_stack *lst);
-
+t_location			findloc(int *sortednumbers, t_holder *hold, int size);
 #endif

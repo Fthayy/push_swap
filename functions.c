@@ -170,8 +170,8 @@ t_holder	*pa(t_holder *hold)
 
 t_holder	*pb(t_holder *hold)
 {
-	t_stack *tmp;
-	t_stack *tmp2;
+	t_stack	*tmp;
+	t_stack	*tmp2;
 	
 	tmp = hold->a->next;
 	hold->a->next->prev = ft_lstlastnmb(hold->a);

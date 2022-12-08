@@ -8,6 +8,7 @@ SRCS		=	four_sort.c \
 				push_swap_utils.c \
 				big_sort.c \
 				create.c \
+				findloc.c \
 
 OBJS		= $(SRCS:%.c=%.o)
 
