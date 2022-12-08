@@ -7,6 +7,7 @@ SRCS		=	four_sort.c \
 				push_swap.c \
 				push_swap_utils.c \
 				big_sort.c \
+				create.c \
 
 OBJS		= $(SRCS:%.c=%.o)
 
