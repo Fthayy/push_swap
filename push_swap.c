@@ -83,7 +83,6 @@ int	main(int ac, char **av)
 	t_holder	*hold;
 	t_longest	longest;
 	t_numbers	*num;
-
 	hold = malloc(sizeof(t_holder));
 	num = malloc(sizeof(t_numbers));
 	if (ac > 1)

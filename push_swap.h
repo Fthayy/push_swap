@@ -82,4 +82,6 @@ char				*get_numbers(char **av);
 int					find_size(char **av);
 t_stack				*ft_prev(t_stack *lst);
 t_location			findloc(int *sortednumbers, t_holder *hold, int size);
+int					find_biggest(t_holder *hold);
+
 #endif
