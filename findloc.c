@@ -46,7 +46,7 @@ int	find_biggest(t_holder *hold)
 	}
 	tmp = hold->a;
 	// printf("i:%d\n", biggest);
-	while (x < 100)
+	while (x < 1600)
 	{
 		if (biggest == ft_lstlastnmb(hold->a)->nb)
 			return (0);
